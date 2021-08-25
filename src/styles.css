@@ -1,0 +1,18 @@
+.panel {
+    border: 1px solid #212529;
+}
+.panel-heading {
+    background: #b5c0ce;
+    font-size: 18px;
+    color: #000;
+    font-weight: 600;
+    padding: 10px;
+    text-align: center;
+  }
+.panel-footer {
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}

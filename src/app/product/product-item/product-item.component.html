@@ -1,0 +1,19 @@
+<div style="padding-bottom: 15px;">
+<div class="panel">
+    <div class="panel-heading">
+        {{product.name}} <span class="price">{{product.price}}$</span>
+    </div>
+    <div class="panel-body">
+        <div class="image-box">
+            <a routerLink="product/{{ product.id }}">
+                <img src = "{{product.imageurl}}"></a> 
+        </div> 
+    </div>
+    <div class="panel-footer">
+        <span class="centre" style="margin: auto">
+            <input type="number" [(ngModel)] = "product.quantity">
+            <button class="btn btn-primary" (click)="addToCart(product)" [disabled] = "!(product.quantity && product.quantity > 0)">Add to Cart</button>
+        </span>
+    </div>
+</div>
+</div>

@@ -1,0 +1,87 @@
+<div class="panel" *ngIf = "!orderComplete">
+    <div class="panel-heading">&nbsp;</div>
+    <div class="panel-body" *ngIf="getCartTotal()">
+        <div class="row">
+            <div class="col-md-6" style="text-align: left;">
+                <div *ngFor="let product of cartData" class="card-body pb-0">
+
+                    <div class="d-flex mb-3 hover-actions-trigger align-items-center">
+                        <div class="file-thumbnail" style="margin-right: 5px;">
+                            <img class="border fit-cover rounded-2" src="{{product.imageurl}}" height="100" width="80">
+                        </div>
+
+                        <div class="ms-3 flex-shrink-1 flex-grow-1">
+                          <h6 class="mb-1"><span class="text-900 fw-semi-bold">{{product.name}} - {{product.price}}$</span></h6>
+                          <div class="fs--1">
+                              <span class="fw-semi-bold"><input type="number" [(ngModel)] = "product.quantity" style="max-width: 50px; margin-right: 10px;"></span>
+                              <span class="fw-medium text-600 ms-2">
+                                <span class="btn btn-danger" (click)="removeItem(product)">Remove</span>
+                            </span>
+                            </div>
+                        </div>
+                      </div>
+                      <hr class="bg-200">
+                </div>
+            </div>
+            <div class="col-md-6" style="text-align: left">
+                <form #form="ngForm" (ngSubmit)="orderComplete = true;onSubmit()" style="padding: 10px;">
+                    <div class="row">
+                        <div class="col-md-4">Full Name</div>
+                        <div class="col-md-8">
+                            <input 
+                      type="text" 
+                      name="name" 
+                      required 
+                      minlength="6"
+                      maxlength="30" 
+                      [(ngModel)]="customerDetails.fullName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">Phone Number</div>
+                        <div class="col-md-8">
+                            <input 
+                      type="number" 
+                      name="phone" 
+                      required 
+                      maxlength="10" 
+                      [(ngModel)]="customerDetails.phone" 
+                      #phoneNumber="ngModel" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">Credit Card</div>
+                        <div class="col-md-8">
+                            <input 
+                      type="number" 
+                      name="card" 
+                      required 
+                      maxlength="16" 
+                      [(ngModel)]="customerDetails.card" class="form-control"
+                      #cardNumber="ngModel">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">Address</div>
+                        <div class="col-md-8">
+                            <textarea name="blogContent" minlength="10" required maxlength="100" [(ngModel)]="customerDetails.address" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
+                  </form>
+                  
+                <h3>Cart Total: {{getCartTotal()}}$</h3>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body" *ngIf="!getCartTotal()" style="text-align: center;">
+       <h3> No items present in cart.</h3>
+    </div>
+</div>
+<div class="panel" *ngIf = "orderComplete">
+<div class="panel-body" style="text-align: center;">
+    <h3>Thank You <span class="text-info">{{customerDetails.fullName}}</span> for shopping with us.</h3><br>
+    <h4>You order of <span class="text-info">{{cartTotal}}$</span> will be delivered within 7 working days.</h4>
+    <h4><a routerLink="/">Return To Products List</a></h4>
+</div>
+</div>
