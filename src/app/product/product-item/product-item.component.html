@@ -11,7 +11,7 @@
     </div>
     <div class="panel-footer">
         <span class="centre" style="margin: auto">
-            <input type="number" [(ngModel)] = "product.quantity">
+            <input type="number" [(ngModel)] = "product.quantity" (ngModelChange) = "onChange(product)">
             <button class="btn btn-primary" (click)="addToCart(product)" [disabled] = "!(product.quantity && product.quantity > 0)">Add to Cart</button>
         </span>
     </div>

@@ -25,4 +25,8 @@ export class ProductListComponent implements OnInit {
     error => this.notificationService.showError('Unexpected error occurred')
     )}
 
+    onQuantityChange(product: Product){
+      console.log('Product: ' + product.id + ' Quantity: ' + product.quantity);
+    }
+
 }

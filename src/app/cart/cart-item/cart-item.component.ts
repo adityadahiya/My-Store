@@ -19,9 +19,16 @@ export class CartItemComponent implements OnInit {
     card : 0
   };
   cartData: Product[];
+  cardTypes: {code: string, desc: string}[];
+  selectedCard: string | null;
   constructor(private cartService: CartService, private notificationService: NotificationService) { 
     this.cartData = [];
     this.cartTotal = 0;
+    this.selectedCard = null;
+    this.cardTypes = [
+      {code: 'CC', desc: 'Credit Card'},
+      {code: 'DC', desc: 'Debit Card'}
+    ];
   }
   getCartData(): void {
     this.cartService.getCartData().subscribe(res => {
@@ -40,6 +47,9 @@ export class CartItemComponent implements OnInit {
   onSubmit() {
     this.cartTotal = this.getCartTotal();
     this.cartService.emptyCart();
+  }
+  onCardSelect(arg: any) {
+    this.customerDetails.card = 0;
   }
   ngOnInit(): void {
     this.getCartData();
